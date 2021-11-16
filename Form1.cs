@@ -19,8 +19,8 @@ namespace WindowsFormsApp4
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Form2 Form2 = new Form2();
-            Form2.ShowDialog();
+            potom potom = new potom();
+            potom.ShowDialog();
         }
 
         private void button2_Click(object sender, EventArgs e)

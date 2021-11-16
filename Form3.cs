@@ -20,7 +20,7 @@ namespace WindowsFormsApp4
 
         MySqlConnection conn;
 
-        public void GetListPrepods(ListBox lb)
+        public void GetListSotrudniki(ListBox lb)
         {
             lb.Items.Clear();
             conn.Open();
@@ -36,7 +36,7 @@ namespace WindowsFormsApp4
             conn.Close();
         }
 
-        public bool InsertPrepods(string Ifio, string Iage, string Idolg)
+        public bool InsertSotrudniki(string Ifio, string Iage, string Idolg)
         {
             int InsertCount = 0;
             bool result = false;
@@ -67,9 +67,9 @@ namespace WindowsFormsApp4
             string Ifio = textBox1.Text;
             string Iage = textBox2.Text;
             string Idolg = textBox3.Text;
-            if (InsertPrepods(Ifio, Iage, Idolg))
+            if (InsertSotrudniki(Ifio, Iage, Idolg))
             {
-                GetListPrepods(listBox1);
+                GetListSotrudniki(listBox1);
             }
             else
             {
@@ -81,7 +81,7 @@ namespace WindowsFormsApp4
         {
             string connStr = "server=caseum.ru;port=33333;user=st_2_8_19;database=st_2_8_19;password=46727777;";
             conn = new MySqlConnection(connStr);
-            GetListPrepods(listBox1);
+            GetListSotrudniki(listBox1);
         }
     }
 }

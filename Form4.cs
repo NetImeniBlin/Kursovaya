@@ -69,7 +69,7 @@ namespace WindowsFormsApp4
             string connstr = "server=caseum.ru;port=33333;user=st_2_8_19;database=st_2_8_19;password=46727777;";
             conn = new MySqlConnection(connstr);
            // GetComboBoxList();
-            GetTables();
+           // GetTables();
         }
     }
 }
