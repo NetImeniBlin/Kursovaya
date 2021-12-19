@@ -21,6 +21,7 @@ namespace WindowsFormsApp4
         MySqlConnection conn;
         public void comboUpdate()
         {
+            comboBox1.Items.Clear();
             string path = "D:\\backup";
             string[] files = Directory.GetFiles(path);
             foreach (string kolvo in files)
@@ -57,18 +58,30 @@ namespace WindowsFormsApp4
         {
             DateTime time = DateTime.Today;
             string backupdate = (time.ToString("d"));
-            string file = $"D:\\{backupdate}.sql";
-            using (MySqlCommand cmd = new MySqlCommand())
+            string file = $"D:\\backup\\{backupdate}.sql";
+            if (Directory.Exists(file))
             {
-                using (MySqlBackup mb = new MySqlBackup(cmd))
-                {
-                    cmd.Connection = conn;
-                    conn.Open();
-                    mb.ExportToFile(file);
-                    conn.Close();
-                }
+                MessageBox.Show("копия с таким названием уже есть, пожалуйста введите другое");
+                button3.Enabled = true;
+                button3.Visible = true;
+                textBox1.Enabled = true;
+                textBox1.Visible = true;
             }
-            comboUpdate();
+            else
+            {
+                using (MySqlCommand cmd = new MySqlCommand())
+                {
+                    using (MySqlBackup mb = new MySqlBackup(cmd))
+                    {
+                        cmd.Connection = conn;
+                        conn.Open();
+                        mb.ExportToFile(file);
+                        conn.Close();
+                    }
+                }
+                MessageBox.Show("копия создана");
+                comboUpdate();
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -88,9 +101,7 @@ namespace WindowsFormsApp4
 
         private void button3_Click(object sender, EventArgs e)
         {
-            DateTime date = DateTime.Today;
-            DateTime time = DateTime.UtcNow;
-            MessageBox.Show("backup UTC date - "+time.ToString("G"));
+            
         }
     }
 }
