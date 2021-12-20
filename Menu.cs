@@ -21,12 +21,14 @@ namespace WindowsFormsApp4
         {
             Backup potom = new Backup();
             potom.ShowDialog();
+            this.Close();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             Form3 Form3 = new Form3();
             Form3.ShowDialog();
+            this.Close();
         }
 
         private void button3_Click(object sender, EventArgs e)

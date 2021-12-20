@@ -13,6 +13,12 @@ namespace WindowsFormsApp4
 {
     public partial class Form3 : Form
     {
+        private MySqlDataAdapter MyDA = new MySqlDataAdapter();
+        private BindingSource bSource = new BindingSource();
+        private DataSet ds = new DataSet();
+        private DataTable table = new DataTable();
+        string id_selected_rows = "0";
+
         public Form3()
         {
             InitializeComponent();
@@ -20,20 +26,39 @@ namespace WindowsFormsApp4
 
         MySqlConnection conn;
 
-        public void GetListSotrudniki(ListBox lb)
+        public void GetSelectedIDString()
         {
-            lb.Items.Clear();
-            conn.Open();
-            string sql = $"SELECT * FROM сотрудники1";
-            MySqlCommand command = new MySqlCommand(sql, conn);
-            MySqlDataReader reader = command.ExecuteReader();
-            while (reader.Read())
-            {
-                lb.Items.Add($"FIO: {reader[1].ToString()} age: {reader[2].ToString()} dolg: {reader[3].ToString()}");
+            string index_selected_rows;
+            index_selected_rows = dataGridView1.SelectedCells[0].RowIndex.ToString();
+            id_selected_rows = dataGridView1.Rows[Convert.ToInt32(index_selected_rows)].Cells[0].Value.ToString();
+            toolStripLabel4.Text = id_selected_rows;
+        }
 
-            }
-            reader.Close();
+        public void GetListUsers()
+        {
+            string commandStr = "SELECT id, FIO, age, dolg FROM сотрудники1";
+            conn.Open();
+            MyDA.SelectCommand = new MySqlCommand(commandStr, conn);
+            MyDA.Fill(table);
+            bSource.DataSource = table;
+            dataGridView1.DataSource = bSource;
             conn.Close();
+            int count_rows = dataGridView1.RowCount - 1;
+            toolStripLabel2.Text = (count_rows).ToString();
+        }
+
+        public void reload_list()
+        {
+            table.Clear();
+            GetListUsers();
+        }
+
+        private void Form3_Load(object sender, EventArgs e)
+        {
+            string connStr = "server=caseum.ru;port=33333;user=st_2_8_19;database=st_2_8_19;password=46727777;";
+            conn = new MySqlConnection(connStr);
+            GetListUsers();
+         //   GetListSotrudniki(listBox1);
         }
 
         public bool InsertSotrudniki(string Ifio, string Iage, string Idolg)
@@ -69,7 +94,7 @@ namespace WindowsFormsApp4
             string Idolg = textBox3.Text;
             if (InsertSotrudniki(Ifio, Iage, Idolg))
             {
-                GetListSotrudniki(listBox1);
+                reload_list();
             }
             else
             {
@@ -77,11 +102,28 @@ namespace WindowsFormsApp4
             }
         }
 
-        private void Form3_Load(object sender, EventArgs e)
+        private void toolStripButton2_Click(object sender, EventArgs e)
         {
-            string connStr = "server=caseum.ru;port=33333;user=st_2_8_19;database=st_2_8_19;password=46727777;";
-            conn = new MySqlConnection(connStr);
-            GetListSotrudniki(listBox1);
+            GetSelectedIDString();
+            MessageBox.Show("Содержимое поля Код, в выбранной строке" + id_selected_rows);
+            string delete = ("DELETE FROM сотрудники1 WHERE id=" + id_selected_rows);
+            MySqlCommand cm = new MySqlCommand(delete, conn);
+            try
+            {
+                conn.Open();
+                cm.ExecuteNonQuery();
+                MessageBox.Show("Удаление прошло успешно", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка удаления строки \n" + ex, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
+            finally
+            {
+                conn.Close();
+                reload_list();
+            }
         }
     }
 }
