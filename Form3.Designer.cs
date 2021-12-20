@@ -84,7 +84,7 @@ namespace WindowsFormsApp4
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(12, 142);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(776, 296);
+            this.dataGridView1.Size = new System.Drawing.Size(430, 296);
             this.dataGridView1.TabIndex = 5;
             // 
             // toolStrip1
@@ -112,6 +112,7 @@ namespace WindowsFormsApp4
             this.toolStripButton1.Name = "toolStripButton1";
             this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton1.Text = "toolStripButton1";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // toolStripButton2
             // 

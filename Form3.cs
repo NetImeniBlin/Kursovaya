@@ -125,5 +125,11 @@ namespace WindowsFormsApp4
                 reload_list();
             }
         }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            reload_list();
+            MessageBox.Show("обновлено","status");
+        }
     }
 }
