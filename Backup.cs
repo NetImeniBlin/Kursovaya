@@ -12,9 +12,9 @@ using System.IO;
 
 namespace WindowsFormsApp4
 {
-    public partial class potom : Form
+    public partial class Backup : Form
     {
-        public potom()
+        public Backup()
         {
             InitializeComponent();
         }
@@ -59,7 +59,7 @@ namespace WindowsFormsApp4
             DateTime time = DateTime.Today;
             string backupdate = (time.ToString("d"));
             string file = $"D:\\backup\\{backupdate}.sql";
-            if (Directory.Exists(file))
+            if (File.Exists(file))
             {
                 MessageBox.Show("копия с таким названием уже есть, пожалуйста введите другое");
                 button3.Enabled = true;
@@ -101,7 +101,34 @@ namespace WindowsFormsApp4
 
         private void button3_Click(object sender, EventArgs e)
         {
-            
+            string NewFileName = ("D:\\backup\\" + Convert.ToString(textBox1.Text) + ".sql");
+            if (File.Exists(NewFileName))
+            {
+                MessageBox.Show("копия с таким названием уже есть, пожалуйста введите другое");
+            }
+            else
+            {
+                using (MySqlCommand cmd = new MySqlCommand())
+                {
+                    using (MySqlBackup mb = new MySqlBackup(cmd))
+                    {
+                        cmd.Connection = conn;
+                        conn.Open();
+                        mb.ExportToFile(NewFileName);
+                        conn.Close();
+                    }
+                }
+                MessageBox.Show("копия создана");
+                comboUpdate();
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            string file = Convert.ToString(comboBox1.Text);
+            File.Delete(file);
+            MessageBox.Show($"копия {file} была удалена");
+            comboUpdate();
         }
     }
 }
