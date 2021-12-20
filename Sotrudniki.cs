@@ -11,7 +11,7 @@ using MySql.Data.MySqlClient;
 
 namespace WindowsFormsApp4
 {
-    public partial class Form3 : Form
+    public partial class Sotrudniki : Form
     {
         private MySqlDataAdapter MyDA = new MySqlDataAdapter();
         private BindingSource bSource = new BindingSource();
@@ -21,7 +21,7 @@ namespace WindowsFormsApp4
         string SelectedTable;
         string commandStr;
 
-        public Form3()
+        public Sotrudniki()
         {
             InitializeComponent();
         }
