@@ -36,7 +36,7 @@ namespace WindowsFormsApp4
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(155, 71);
+            this.button1.Location = new System.Drawing.Point(12, 71);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(96, 53);
             this.button1.TabIndex = 0;
@@ -46,7 +46,7 @@ namespace WindowsFormsApp4
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(155, 12);
+            this.button2.Location = new System.Drawing.Point(12, 12);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(96, 53);
             this.button2.TabIndex = 1;
@@ -56,7 +56,7 @@ namespace WindowsFormsApp4
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(155, 130);
+            this.button3.Location = new System.Drawing.Point(12, 130);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(96, 53);
             this.button3.TabIndex = 2;
@@ -68,7 +68,7 @@ namespace WindowsFormsApp4
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(549, 296);
+            this.ClientSize = new System.Drawing.Size(120, 190);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);

@@ -22,7 +22,7 @@ namespace WindowsFormsApp4
         public void comboUpdate()
         {
             comboBox1.Items.Clear();
-            string path = "D:\\backup";
+            string path = "C:\\backup";
             string[] files = Directory.GetFiles(path);
             foreach (string kolvo in files)
             {
@@ -33,7 +33,7 @@ namespace WindowsFormsApp4
         {
             string connStr = "server=caseum.ru;port=33333;user=st_2_8_19;database=st_2_8_19;password=46727777;";
             conn = new MySqlConnection(connStr);
-            string path = "D:\\backup";
+            string path = "C:\\backup";
             if (Directory.Exists(path))
             {
                 string[] files = Directory.GetFiles(path);
@@ -44,7 +44,7 @@ namespace WindowsFormsApp4
             }
             else
             {
-                Directory.CreateDirectory("D:\\backup");
+                Directory.CreateDirectory("C:\\backup");
                 string[] files = Directory.GetFiles(path);
                 foreach (string kolvo in files)
                 {
@@ -58,7 +58,7 @@ namespace WindowsFormsApp4
         {
             DateTime time = DateTime.Today;
             string backupdate = (time.ToString("d"));
-            string file = $"D:\\backup\\{backupdate}.sql";
+            string file = $"C:\\backup\\{backupdate}.sql";
             if (File.Exists(file))
             {
                 MessageBox.Show("копия с таким названием уже есть, пожалуйста введите другое");
@@ -101,7 +101,7 @@ namespace WindowsFormsApp4
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string NewFileName = ("D:\\backup\\" + Convert.ToString(textBox1.Text) + ".sql");
+            string NewFileName = ("C:\\backup\\" + Convert.ToString(textBox1.Text) + ".sql");
             if (File.Exists(NewFileName))
             {
                 MessageBox.Show("копия с таким названием уже есть, пожалуйста введите другое");
