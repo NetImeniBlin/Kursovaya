@@ -39,13 +39,39 @@ namespace WindowsFormsApp4
         {
             SelectedTable = Convert.ToString(toolStripComboBox1.Text);
             commandStr = $"SELECT id, FIO, age, dolg FROM {SelectedTable}";
+            string commandStr1 = $"SELECT id, FIO, age, dolg FROM сотрудники1";
+            string commandStr2 = $"SELECT id, FIO, age, dolg FROM сотрудники2";
+            string commandStr3 = $"SELECT id, FIO, age, dolg FROM сотрудники3";
             conn.Open();
             MyDA.SelectCommand = new MySqlCommand(commandStr, conn);
+            MySqlCommand com1 = new MySqlCommand(commandStr1, conn);
+            MySqlDataReader reader1 = com1.ExecuteReader();
+            while (reader1.Read())
+            {
+                listBox1.Items.Add(reader1[0].ToString());
+            }
+            reader1.Close();
+            MySqlCommand com2 = new MySqlCommand(commandStr2, conn);
+            MySqlDataReader reader2 = com2.ExecuteReader();
+            while (reader2.Read())
+            {
+                listBox1.Items.Add(reader2[0].ToString());
+            }
+            reader2.Close();
+            MySqlCommand com3 = new MySqlCommand(commandStr3, conn);
+            MySqlDataReader reader3 = com3.ExecuteReader();
+            while (reader3.Read())
+            {
+                listBox1.Items.Add(reader3[0].ToString());
+            }
+            reader3.Close();
             MyDA.Fill(table);
             bSource.DataSource = table;
             dataGridView1.DataSource = bSource;
             conn.Close();
-            int count_rows = dataGridView1.RowCount - 1;
+            
+            int count_rows = listBox1.Items.Count;
+            toolStripLabel1.Text = (count_rows).ToString();
         }
 
         public void reload_list()
@@ -62,6 +88,10 @@ namespace WindowsFormsApp4
             {
                 string dolgstatus = Convert.ToString(dataGridView1.Rows[i].Cells[3].Value);
                 if (dolgstatus == "стажер")
+                {
+                    dataGridView1.Rows[i].DefaultCellStyle.BackColor = Color.Yellow;
+                }
+                else if (dolgstatus == "стажёр")
                 {
                     dataGridView1.Rows[i].DefaultCellStyle.BackColor = Color.Yellow;
                 }
@@ -114,7 +144,7 @@ namespace WindowsFormsApp4
         {
             string connStr = "server=caseum.ru;port=33333;user=st_2_8_19;database=st_2_8_19;password=46727777;";
             conn = new MySqlConnection(connStr);
-            ToolTip tip = new ToolTip();
+           // ToolTip tip = new ToolTip();
             items();
             GetListUsers();
             ChangeColorDGV();
