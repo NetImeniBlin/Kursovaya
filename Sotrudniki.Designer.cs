@@ -48,6 +48,7 @@ namespace WindowsFormsApp4
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.listBox1 = new System.Windows.Forms.ListBox();
+            this.listBox2 = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -97,7 +98,7 @@ namespace WindowsFormsApp4
             this.toolStripLabel2});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(462, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(712, 25);
             this.toolStrip1.TabIndex = 6;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -157,7 +158,7 @@ namespace WindowsFormsApp4
             // toolStripLabel2
             // 
             this.toolStripLabel2.Name = "toolStripLabel2";
-            this.toolStripLabel2.Size = new System.Drawing.Size(153, 15);
+            this.toolStripLabel2.Size = new System.Drawing.Size(153, 22);
             this.toolStripLabel2.Text = "|Кол-во записей в таблице";
             // 
             // label1
@@ -195,9 +196,9 @@ namespace WindowsFormsApp4
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(338, 29);
+            this.textBox4.Location = new System.Drawing.Point(580, 32);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(112, 20);
+            this.textBox4.Size = new System.Drawing.Size(120, 20);
             this.textBox4.TabIndex = 10;
             this.textBox4.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox4_MouseClick);
             // 
@@ -206,7 +207,7 @@ namespace WindowsFormsApp4
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.SystemColors.Window;
             this.label4.Enabled = false;
-            this.label4.Location = new System.Drawing.Point(344, 32);
+            this.label4.Location = new System.Drawing.Point(586, 35);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(97, 13);
             this.label4.TabIndex = 11;
@@ -222,12 +223,21 @@ namespace WindowsFormsApp4
             this.listBox1.TabIndex = 12;
             this.listBox1.Visible = false;
             // 
+            // listBox2
+            // 
+            this.listBox2.FormattingEnabled = true;
+            this.listBox2.Location = new System.Drawing.Point(466, 107);
+            this.listBox2.Name = "listBox2";
+            this.listBox2.Size = new System.Drawing.Size(234, 329);
+            this.listBox2.TabIndex = 13;
+            // 
             // Sotrudniki
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(462, 450);
+            this.ClientSize = new System.Drawing.Size(712, 450);
+            this.Controls.Add(this.listBox2);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.textBox4);
@@ -269,5 +279,6 @@ namespace WindowsFormsApp4
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.ToolStripLabel toolStripLabel2;
         private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox listBox2;
     }
 }

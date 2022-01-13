@@ -183,6 +183,55 @@ namespace WindowsFormsApp4
         {
             SelectedTable = Convert.ToString(toolStripComboBox1.Text);
             reload_list();
+            listBox2.Items.Clear();
+            if(SelectedTable == "сотрудники1")
+            {
+                conn.Open();
+                string comm = $"SELECT Номер_Пекарни, Район, Улица, Номер_телефона FROM адреса where Номер_Пекарни = 1";
+                MySqlCommand com1 = new MySqlCommand(comm, conn);
+                MySqlDataReader reader1 = com1.ExecuteReader();
+                while (reader1.Read())
+                {
+                    listBox2.Items.Add("Номер пекарни - "+reader1[0].ToString());
+                    listBox2.Items.Add("Район - " + reader1[1].ToString());
+                    listBox2.Items.Add("Улица - " + reader1[2].ToString());
+                    listBox2.Items.Add("Номер телефон - " + reader1[3].ToString());
+                }
+                reader1.Close();
+                conn.Close();
+            }
+            else if(SelectedTable == "сотрудники2")
+            {
+                conn.Open();
+                string comm = $"SELECT Номер_Пекарни, Район, Улица, Номер_телефона FROM адреса where Номер_Пекарни = 2";
+                MySqlCommand com1 = new MySqlCommand(comm, conn);
+                MySqlDataReader reader1 = com1.ExecuteReader();
+                while (reader1.Read())
+                {
+                    listBox2.Items.Add("Номер пекарни - " + reader1[0].ToString());
+                    listBox2.Items.Add("Район - " + reader1[1].ToString());
+                    listBox2.Items.Add("Улица - " + reader1[2].ToString());
+                    listBox2.Items.Add("Номер телефон - " + reader1[3].ToString());
+                }
+                reader1.Close();
+                conn.Close();
+            }
+            else if(SelectedTable == "сотрудники3")
+            {
+                conn.Open();
+                string comm = $"SELECT Номер_Пекарни, Район, Улица, Номер_телефона FROM адреса where Номер_Пекарни = 3";
+                MySqlCommand com1 = new MySqlCommand(comm, conn);
+                MySqlDataReader reader1 = com1.ExecuteReader();
+                while (reader1.Read())
+                {
+                    listBox2.Items.Add("Номер пекарни - " + reader1[0].ToString());
+                    listBox2.Items.Add("Район - " + reader1[1].ToString());
+                    listBox2.Items.Add("Улица - " + reader1[2].ToString());
+                    listBox2.Items.Add("Номер телефон - " + reader1[3].ToString());
+                }
+                reader1.Close();
+                conn.Close();
+            }
         }
 
         private void textBox1_MouseClick(object sender, MouseEventArgs e)
