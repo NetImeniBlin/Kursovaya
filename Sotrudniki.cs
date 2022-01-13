@@ -153,7 +153,7 @@ namespace WindowsFormsApp4
         {
             GetSelectedIDString();
             MessageBox.Show("Содержимое поля Код, в выбранной строке" + id_selected_rows);
-            string delete = ("DELETE FROM сотрудники1 WHERE id=" + id_selected_rows);
+            string delete = ($"DELETE FROM {SelectedTable} WHERE id=" + id_selected_rows);
             MySqlCommand cm = new MySqlCommand(delete, conn);
             try
             {
