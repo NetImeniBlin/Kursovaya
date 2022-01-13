@@ -37,6 +37,7 @@ namespace WindowsFormsApp4
 
         public void GetListUsers()
         {
+            listBox1.Items.Clear();
             SelectedTable = Convert.ToString(toolStripComboBox1.Text);
             commandStr = $"SELECT id, FIO, age, dolg FROM {SelectedTable}";
             string commandStr1 = $"SELECT id, FIO, age, dolg FROM сотрудники1";
@@ -144,9 +145,7 @@ namespace WindowsFormsApp4
         {
             string connStr = "server=caseum.ru;port=33333;user=st_2_8_19;database=st_2_8_19;password=46727777;";
             conn = new MySqlConnection(connStr);
-           // ToolTip tip = new ToolTip();
             items();
-            GetListUsers();
             ChangeColorDGV();
         }
 

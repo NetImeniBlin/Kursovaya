@@ -130,13 +130,5 @@ namespace WindowsFormsApp4
             MessageBox.Show($"копия {file} была удалена");
             comboUpdate();
         }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            Menu me = new Menu();
-            me.ShowDialog();
-            Backup bek = new Backup();
-            bek.Close();
-        }
     }
 }
