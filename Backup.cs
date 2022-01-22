@@ -102,7 +102,11 @@ namespace WindowsFormsApp4
         private void button3_Click(object sender, EventArgs e)
         {
             string NewFileName = ("C:\\backup\\" + Convert.ToString(textBox1.Text) + ".sql");
-            if (File.Exists(NewFileName))
+            if (textBox1.Text == "")
+            {
+                MessageBox.Show("пожалуйста укажите название копии");
+            }
+            else if (File.Exists(NewFileName))
             {
                 MessageBox.Show("копия с таким названием уже есть, пожалуйста введите другое");
             }

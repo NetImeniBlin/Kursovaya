@@ -39,7 +39,7 @@ namespace WindowsFormsApp4
         {
             listBox1.Items.Clear();
             SelectedTable = Convert.ToString(toolStripComboBox1.Text);
-            commandStr = $"SELECT id, FIO, age, dolg FROM {SelectedTable}";
+            commandStr = $"SELECT id, FIO as ФИО, age as Возраст, dolg as Должность FROM {SelectedTable}";
             string commandStr1 = $"SELECT id, FIO, age, dolg FROM сотрудники1";
             string commandStr2 = $"SELECT id, FIO, age, dolg FROM сотрудники2";
             string commandStr3 = $"SELECT id, FIO, age, dolg FROM сотрудники3";
@@ -271,14 +271,21 @@ namespace WindowsFormsApp4
 
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
-            GetSelectedIDString();
-            string newdolg = Convert.ToString(textBox4.Text);  
-            string cm = ($"UPDATE {SelectedTable} SET dolg='{newdolg}' WHERE id='{id_selected_rows}'");
-            MySqlCommand redact = new MySqlCommand(cm, conn);
-            conn.Open();
-            redact.ExecuteNonQuery();
-            conn.Close();
-            reload_list();
+            if (textBox4.Text == "")
+            {
+                MessageBox.Show("пожалуйста, укажите новую должность");
+            }
+            else
+            {
+                GetSelectedIDString();
+                string newdolg = Convert.ToString(textBox4.Text);
+                string cm = ($"UPDATE {SelectedTable} SET dolg='{newdolg}' WHERE id='{id_selected_rows}'");
+                MySqlCommand redact = new MySqlCommand(cm, conn);
+                conn.Open();
+                redact.ExecuteNonQuery();
+                conn.Close();
+                reload_list();
+            }
         }
     }
 }

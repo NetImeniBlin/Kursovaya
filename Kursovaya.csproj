@@ -58,14 +58,14 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MySql.Data">
-      <HintPath>..\..\..\..\Desktop\v4.5.2\MySql.Data.dll</HintPath>
+      <HintPath>..\..\..\..\Desktop\mysql.data\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="MySqlBackup">
-      <HintPath>..\..\..\..\Desktop\v4.5.2\MySqlBackup.dll</HintPath>
+      <HintPath>..\..\..\..\Desktop\mysql.data\MySqlBackup.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
