@@ -66,11 +66,13 @@ namespace WindowsFormsApp4
                 listBox1.Items.Add(reader3[0].ToString());
             }
             reader3.Close();
+
+            MyDA.SelectCommand = new MySqlCommand(commandStr, conn);
             MyDA.Fill(table);
             bSource.DataSource = table;
             dataGridView1.DataSource = bSource;
             conn.Close();
-            
+
             int count_rows = listBox1.Items.Count;
             toolStripLabel1.Text = (count_rows).ToString();
         }
@@ -147,6 +149,21 @@ namespace WindowsFormsApp4
             conn = new MySqlConnection(connStr);
             items();
             ChangeColorDGV();
+            dataGridView1.Columns[0].FillWeight = 5;
+            dataGridView1.Columns[1].FillWeight = 34;
+            dataGridView1.Columns[2].FillWeight = 10;
+            dataGridView1.Columns[3].FillWeight = 13;
+            //dataGridView1.Columns[4].FillWeight = 15;
+            dataGridView1.Columns[0].ReadOnly = true;
+            dataGridView1.Columns[1].ReadOnly = true;
+            dataGridView1.Columns[2].ReadOnly = true;
+            dataGridView1.Columns[3].ReadOnly = true;
+            //dataGridView1.Columns[4].ReadOnly = true;
+            dataGridView1.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView1.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView1.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView1.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            //dataGridView1.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 
         private void toolStripButton2_Click(object sender, EventArgs e)

@@ -62,10 +62,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MySql.Data">
-      <HintPath>..\..\..\..\Desktop\mysql.data\MySql.Data.dll</HintPath>
+      <HintPath>..\..\..\..\Desktop\.vs\mysql.data\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="MySqlBackup">
-      <HintPath>..\..\..\..\Desktop\mysql.data\MySqlBackup.dll</HintPath>
+      <HintPath>..\..\..\..\Desktop\.vs\mysql.data\MySqlBackup.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
