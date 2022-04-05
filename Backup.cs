@@ -31,8 +31,8 @@ namespace WindowsFormsApp4
         }
         private void potom_Load(object sender, EventArgs e)
         {
-            string connStr = "server=caseum.ru;port=33333;user=st_2_8_19;database=st_2_8_19;password=46727777;";
-            conn = new MySqlConnection(connStr);
+            Program.Podkl connn = new Program.Podkl();
+            conn = new MySqlConnection(connn.Connstring);
             string path = "C:\\backup";
             if (Directory.Exists(path))
             {

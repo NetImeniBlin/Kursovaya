@@ -145,8 +145,8 @@ namespace WindowsFormsApp4
 
         private void Form3_Load(object sender, EventArgs e)
         {
-            string connStr = "server=caseum.ru;port=33333;user=st_2_8_19;database=st_2_8_19;password=46727777;";
-            conn = new MySqlConnection(connStr);
+            Program.Podkl connn = new Program.Podkl();
+            conn = new MySqlConnection(connn.Connstring);
             items();
             ChangeColorDGV();
             dataGridView1.Columns[0].FillWeight = 5;
