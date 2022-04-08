@@ -29,6 +29,7 @@ namespace WindowsFormsApp4
                 comboBox1.Items.Add(kolvo);
             }
         }
+
         private void potom_Load(object sender, EventArgs e)
         {
             Program.Podkl connn = new Program.Podkl();
@@ -51,9 +52,8 @@ namespace WindowsFormsApp4
                     comboBox1.Items.Add(kolvo);
                 }
             }
-
         }
-
+        
         private void button1_Click(object sender, EventArgs e)
         {
             DateTime time = DateTime.Today;
