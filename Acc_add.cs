@@ -140,7 +140,7 @@ namespace WindowsFormsApp4
         {
             if (textBox1.Text == ""| textBox2.Text == "" | textBox3.Text == "")
             {
-                MessageBox.Show("пожалуйста, укажите необходимые данные");
+                MessageBox.Show("пожалуйста, укажите необходимые данные","status: error");
             }
             else
             {
@@ -156,7 +156,7 @@ namespace WindowsFormsApp4
         {
             if (textBox1.Text == "" | textBox2.Text == "" | textBox3.Text == "")
             {
-                MessageBox.Show("пожалуйста, укажите необходимые данные");
+                MessageBox.Show("пожалуйста, укажите необходимые данные","status: error");
             }
             else
             {
@@ -185,7 +185,6 @@ namespace WindowsFormsApp4
             catch (Exception ex)
             {
                 MessageBox.Show("Ошибка удаления строки \n" + ex, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Application.Exit();
             }
             finally
             {
