@@ -84,6 +84,7 @@ namespace WindowsFormsApp4
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(438, 329);
             this.dataGridView1.TabIndex = 5;
+            this.dataGridView1.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_ColumnHeaderMouseClick);
             // 
             // toolStrip1
             // 
@@ -221,9 +222,9 @@ namespace WindowsFormsApp4
             // 
             this.listBox1.Enabled = false;
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(63, 268);
+            this.listBox1.Location = new System.Drawing.Point(580, 58);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(120, 95);
+            this.listBox1.Size = new System.Drawing.Size(43, 17);
             this.listBox1.TabIndex = 12;
             this.listBox1.Visible = false;
             // 
@@ -256,7 +257,7 @@ namespace WindowsFormsApp4
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Sotrudniki";
             this.Text = "Sotrudniki";
-            this.Load += new System.EventHandler(this.Form3_Load);
+            this.Load += new System.EventHandler(this.Sotrudniki_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();

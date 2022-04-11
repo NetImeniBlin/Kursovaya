@@ -18,19 +18,10 @@ namespace WindowsFormsApp4
         {
             InitializeComponent();
         }
-        MySqlConnection conn;
-        public void comboUpdate()
-        {
-            comboBox1.Items.Clear();
-            string path = "C:\\backup";
-            string[] files = Directory.GetFiles(path);
-            foreach (string kolvo in files)
-            {
-                comboBox1.Items.Add(kolvo);
-            }
-        }
 
-        private void potom_Load(object sender, EventArgs e)
+        MySqlConnection conn;
+
+        private void Backup_Load(object sender, EventArgs e)
         {
             Program.Podkl connn = new Program.Podkl();
             conn = new MySqlConnection(connn.Connstring);
@@ -53,6 +44,17 @@ namespace WindowsFormsApp4
                 }
             }
         }
+
+        public void comboUpdate()
+        {
+            comboBox1.Items.Clear();
+            string path = "C:\\backup";
+            string[] files = Directory.GetFiles(path);
+            foreach (string kolvo in files)
+            {
+                comboBox1.Items.Add(kolvo);
+            }
+        }
         
         private void button1_Click(object sender, EventArgs e)
         {
@@ -66,6 +68,7 @@ namespace WindowsFormsApp4
                 button3.Visible = true;
                 textBox1.Enabled = true;
                 textBox1.Visible = true;
+                label1.Visible = true;
             }
             else
             {

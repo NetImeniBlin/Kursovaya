@@ -16,17 +16,13 @@ namespace WindowsFormsApp4
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Menu());
+            Application.Run(new Autenth());
         }
 
 
         public class Podkl
         {
             public string Connstring = "server=chuc.caseum.ru;port=33333;user=st_2_19_8;database=is_2_19_st8_KURS;password=33980803;";
-            public string Vkl()
-            {
-                return Connstring;
-            }
         }
     }
 }

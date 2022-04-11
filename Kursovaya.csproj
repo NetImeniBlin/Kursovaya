@@ -80,17 +80,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="auth.cs">
+    <Compile Include="Acc_add.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="auth.Designer.cs">
-      <DependentUpon>auth.cs</DependentUpon>
+    <Compile Include="Acc_add.Designer.cs">
+      <DependentUpon>Acc_add.cs</DependentUpon>
     </Compile>
     <Compile Include="Menu.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Menu.Designer.cs">
       <DependentUpon>Menu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Autenth.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Autenth.Designer.cs">
+      <DependentUpon>Autenth.cs</DependentUpon>
     </Compile>
     <Compile Include="Sotrudniki.cs">
       <SubType>Form</SubType>
@@ -106,11 +112,14 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="auth.resx">
-      <DependentUpon>auth.cs</DependentUpon>
+    <EmbeddedResource Include="Acc_add.resx">
+      <DependentUpon>Acc_add.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Menu.resx">
       <DependentUpon>Menu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Autenth.resx">
+      <DependentUpon>Autenth.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sotrudniki.resx">
       <DependentUpon>Sotrudniki.cs</DependentUpon>
@@ -126,6 +135,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -151,6 +161,18 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\toolStripButton1.Image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\toolStripButton2.Image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\toolStripButton3.Image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\toolStripButton4.Image.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

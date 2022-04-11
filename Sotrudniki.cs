@@ -34,7 +34,7 @@ namespace WindowsFormsApp4
             index_selected_rows = dataGridView1.SelectedCells[0].RowIndex.ToString();
             id_selected_rows = dataGridView1.Rows[Convert.ToInt32(index_selected_rows)].Cells[0].Value.ToString();
         }
-
+        
         public void GetListUsers()
         {
             listBox1.Items.Clear();
@@ -143,7 +143,7 @@ namespace WindowsFormsApp4
             return result;
         }
 
-        private void Form3_Load(object sender, EventArgs e)
+        private void Sotrudniki_Load(object sender, EventArgs e)
         {
             Program.Podkl connn = new Program.Podkl();
             conn = new MySqlConnection(connn.Connstring);
@@ -153,23 +153,20 @@ namespace WindowsFormsApp4
             dataGridView1.Columns[1].FillWeight = 34;
             dataGridView1.Columns[2].FillWeight = 10;
             dataGridView1.Columns[3].FillWeight = 13;
-            //dataGridView1.Columns[4].FillWeight = 15;
             dataGridView1.Columns[0].ReadOnly = true;
             dataGridView1.Columns[1].ReadOnly = true;
             dataGridView1.Columns[2].ReadOnly = true;
             dataGridView1.Columns[3].ReadOnly = true;
-            //dataGridView1.Columns[4].ReadOnly = true;
             dataGridView1.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridView1.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridView1.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridView1.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            //dataGridView1.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView1.RowHeadersVisible = false;
         }
 
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
             GetSelectedIDString();
-            MessageBox.Show("Содержимое поля Код, в выбранной строке" + id_selected_rows);
             string delete = ($"DELETE FROM {SelectedTable} WHERE id=" + id_selected_rows);
             MySqlCommand cm = new MySqlCommand(delete, conn);
             try
@@ -204,7 +201,7 @@ namespace WindowsFormsApp4
             if(SelectedTable == "сотрудники1")
             {
                 conn.Open();
-                string comm = $"SELECT Номер_Пекарни, Район, Улица, Номер_телефона FROM адреса where Номер_Пекарни = 1";
+                string comm = $"SELECT Номер_Пекарни, Район, Улица, Номер_телефона, Часы_работы FROM адреса where Номер_Пекарни = 1";
                 MySqlCommand com1 = new MySqlCommand(comm, conn);
                 MySqlDataReader reader1 = com1.ExecuteReader();
                 while (reader1.Read())
@@ -213,6 +210,7 @@ namespace WindowsFormsApp4
                     listBox2.Items.Add("Район - " + reader1[1].ToString());
                     listBox2.Items.Add("Улица - " + reader1[2].ToString());
                     listBox2.Items.Add("Номер телефон - " + reader1[3].ToString());
+                    listBox2.Items.Add("Часы работы - " + reader1[4].ToString());
                 }
                 reader1.Close();
                 conn.Close();
@@ -220,7 +218,7 @@ namespace WindowsFormsApp4
             else if(SelectedTable == "сотрудники2")
             {
                 conn.Open();
-                string comm = $"SELECT Номер_Пекарни, Район, Улица, Номер_телефона FROM адреса where Номер_Пекарни = 2";
+                string comm = $"SELECT Номер_Пекарни, Район, Улица, Номер_телефона, Часы_работы FROM адреса where Номер_Пекарни = 2";
                 MySqlCommand com1 = new MySqlCommand(comm, conn);
                 MySqlDataReader reader1 = com1.ExecuteReader();
                 while (reader1.Read())
@@ -229,6 +227,8 @@ namespace WindowsFormsApp4
                     listBox2.Items.Add("Район - " + reader1[1].ToString());
                     listBox2.Items.Add("Улица - " + reader1[2].ToString());
                     listBox2.Items.Add("Номер телефон - " + reader1[3].ToString());
+                    listBox2.Items.Add("Часы работы - " + reader1[4].ToString());
+
                 }
                 reader1.Close();
                 conn.Close();
@@ -236,7 +236,7 @@ namespace WindowsFormsApp4
             else if(SelectedTable == "сотрудники3")
             {
                 conn.Open();
-                string comm = $"SELECT Номер_Пекарни, Район, Улица, Номер_телефона FROM адреса where Номер_Пекарни = 3";
+                string comm = $"SELECT Номер_Пекарни, Район, Улица, Номер_телефона, Часы_работы FROM адреса where Номер_Пекарни = 3";
                 MySqlCommand com1 = new MySqlCommand(comm, conn);
                 MySqlDataReader reader1 = com1.ExecuteReader();
                 while (reader1.Read())
@@ -245,6 +245,7 @@ namespace WindowsFormsApp4
                     listBox2.Items.Add("Район - " + reader1[1].ToString());
                     listBox2.Items.Add("Улица - " + reader1[2].ToString());
                     listBox2.Items.Add("Номер телефон - " + reader1[3].ToString());
+                    listBox2.Items.Add("Часы работы - " + reader1[4].ToString());
                 }
                 reader1.Close();
                 conn.Close();
@@ -303,6 +304,11 @@ namespace WindowsFormsApp4
                 conn.Close();
                 reload_list();
             }
+        }
+
+        private void dataGridView1_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            reload_list();
         }
     }
 }

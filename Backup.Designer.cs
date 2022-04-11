@@ -35,6 +35,7 @@ namespace WindowsFormsApp4
             this.button3 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button4 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
@@ -49,7 +50,7 @@ namespace WindowsFormsApp4
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(283, 94);
+            this.button2.Location = new System.Drawing.Point(283, 63);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(145, 23);
             this.button2.TabIndex = 1;
@@ -60,7 +61,7 @@ namespace WindowsFormsApp4
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(283, 123);
+            this.comboBox1.Location = new System.Drawing.Point(283, 96);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(301, 21);
             this.comboBox1.TabIndex = 2;
@@ -81,7 +82,7 @@ namespace WindowsFormsApp4
             // textBox1
             // 
             this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(12, 123);
+            this.textBox1.Location = new System.Drawing.Point(12, 140);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(172, 20);
             this.textBox1.TabIndex = 4;
@@ -89,7 +90,7 @@ namespace WindowsFormsApp4
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(434, 94);
+            this.button4.Location = new System.Drawing.Point(434, 63);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(150, 23);
             this.button4.TabIndex = 5;
@@ -97,12 +98,23 @@ namespace WindowsFormsApp4
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(13, 124);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(121, 13);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "название новой копии";
+            this.label1.Visible = false;
+            // 
             // Backup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(616, 192);
+            this.ClientSize = new System.Drawing.Size(616, 179);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button3);
@@ -112,7 +124,7 @@ namespace WindowsFormsApp4
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Backup";
             this.Text = "Backup";
-            this.Load += new System.EventHandler(this.potom_Load);
+            this.Load += new System.EventHandler(this.Backup_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -126,5 +138,6 @@ namespace WindowsFormsApp4
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Label label1;
     }
 }
