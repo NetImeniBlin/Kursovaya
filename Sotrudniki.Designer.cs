@@ -256,7 +256,7 @@ namespace WindowsFormsApp4
             this.Controls.Add(this.textBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Sotrudniki";
-            this.Text = "Sotrudniki";
+            this.Text = "Сотрудники";
             this.Load += new System.EventHandler(this.Sotrudniki_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.toolStrip1.ResumeLayout(false);

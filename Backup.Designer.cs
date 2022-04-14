@@ -123,7 +123,7 @@ namespace WindowsFormsApp4
             this.Controls.Add(this.button1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Backup";
-            this.Text = "Backup";
+            this.Text = "Резервное копирование базы данных";
             this.Load += new System.EventHandler(this.Backup_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

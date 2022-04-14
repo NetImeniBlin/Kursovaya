@@ -90,16 +90,13 @@ namespace WindowsFormsApp4
         private void button2_Click(object sender, EventArgs e)
         {
             string file = Convert.ToString(comboBox1.Text);
-            using (MySqlCommand cmd = new MySqlCommand())
-            {
-                using (MySqlBackup ex = new MySqlBackup(cmd))
-                {
-                    cmd.Connection = conn;
-                    conn.Open();
-                    ex.ImportFromFile(file);
-                    conn.Close();
-                }
-            }
+            MySqlCommand cmd = new MySqlCommand();
+            MySqlBackup ex = new MySqlBackup(cmd);
+            cmd.Connection = conn;
+            conn.Open();
+            ex.ImportFromFile(file);
+            conn.Close();
+            MessageBox.Show("копия успешно восстановлена", "status: succes");
         }
 
         private void button3_Click(object sender, EventArgs e)

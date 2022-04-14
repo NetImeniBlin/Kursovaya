@@ -114,7 +114,7 @@ namespace WindowsFormsApp4
             this.Controls.Add(this.button1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Autenth";
-            this.Text = "Auth";
+            this.Text = "Авторизация";
             this.Load += new System.EventHandler(this.Autenth_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

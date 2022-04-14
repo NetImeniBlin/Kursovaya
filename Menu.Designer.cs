@@ -75,7 +75,7 @@
             this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "Menu";
-            this.Text = "Menu";
+            this.Text = "Меню";
             this.ResumeLayout(false);
 
         }
