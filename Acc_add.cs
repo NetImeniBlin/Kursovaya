@@ -24,6 +24,7 @@ namespace WindowsFormsApp4
         private DataSet ds = new DataSet();
         private DataTable table = new DataTable();
         string commandStr;
+        public string query;
 
         private void Acc_add_Load(object sender, EventArgs e)
         {
@@ -36,23 +37,30 @@ namespace WindowsFormsApp4
             dataGridView1.Columns[1].FillWeight = 34;
             dataGridView1.Columns[2].FillWeight = 30;
             dataGridView1.Columns[3].FillWeight = 30;
+            dataGridView1.Columns[4].FillWeight = 30;
 
             dataGridView1.Columns[0].ReadOnly = true;
             dataGridView1.Columns[1].ReadOnly = true;
             dataGridView1.Columns[2].ReadOnly = true;
             dataGridView1.Columns[3].ReadOnly = true;
+            dataGridView1.Columns[4].ReadOnly = true;
 
             dataGridView1.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridView1.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridView1.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridView1.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView1.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             dataGridView1.RowHeadersVisible = false;
+
+            comboBox2.Items.Add("1");
+            comboBox2.Items.Add("2");
+            comboBox2.Items.Add("3");
         }
 
         public void GetListUsers()
         {
-            commandStr = $"SELECT id, log as Логин, pass as Пароль, fio as ФИО FROM users";
+            commandStr = $"SELECT id, log as Логин, pass as Пароль, fio as ФИО, Номер_пекарни as 'Номер пекарни' FROM users";
             conn.Open();
             MyDA.SelectCommand = new MySqlCommand(commandStr, conn);
             MyDA.Fill(table);
@@ -84,12 +92,39 @@ namespace WindowsFormsApp4
             GetListId();
         }
 
-        public bool InsertSotrudniki(string Ilog, string Ipass, string Ifio)
+        public void InsertManager(ComboBox CM, TextBox txt)
+        { 
+            switch (Convert.ToInt32(CM.Text))
+            {
+                case 1:
+                    query = $"insert into сотрудники1 (FIO, dolg) values ('{txt.Text}', 'менеджер')";
+                    break;
+                case 2:
+                    query = $"insert into сотрудники2 (FIO, dolg) values ('{txt.Text}', 'менеджер')";
+                    break;
+                case 3:
+                    query = $"insert into сотрудники3 (FIO, dolg) values ('{txt.Text}', 'менеджер')";
+                    break;
+            }
+            MySqlCommand com = new MySqlCommand(query, conn);
+            conn.Open();
+            com.ExecuteNonQuery();
+            conn.Close();
+        }
+
+        public bool InsertUsers(string Ilog, string Ipass, string Ifio, string Inumber)
         {
             int InsertCount = 0;
             bool result = false;
             conn.Open();
-            string query = $"INSERT INTO users (log, pass, fio) VALUES ('{Ilog}', '{Ipass}', '{Ifio}')";
+            if (comboBox2.Text == "")
+            {
+                query = $"INSERT INTO users (log, pass, fio) VALUES ('{Ilog}', '{Ipass}', '{Ifio}')";   
+            }
+            else
+            {
+                query = $"INSERT INTO users (log, pass, fio, Номер_пекарни) VALUES ('{Ilog}', '{Ipass}', '{Ifio}', {Inumber})";
+            }
             try
             {
                 MySqlCommand command = new MySqlCommand(query, conn);
@@ -160,7 +195,11 @@ namespace WindowsFormsApp4
             }
             else
             {
-                InsertSotrudniki(textBox1.Text, textBox2.Text, textBox3.Text);
+                InsertUsers(textBox1.Text, textBox2.Text, textBox3.Text, comboBox2.Text);
+            }
+            if(comboBox2.SelectedText.Length > 0)
+            {
+                InsertManager(comboBox2, textBox3);
             }
             reload_list();
         }
