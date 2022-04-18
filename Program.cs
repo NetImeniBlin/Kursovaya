@@ -19,7 +19,6 @@ namespace WindowsFormsApp4
             Application.Run(new Autenth());
         }
 
-
         public class Podkl
         {
             public string Connstring = "server=chuc.caseum.ru;port=33333;user=st_2_19_8;database=is_2_19_st8_KURS;password=33980803;";

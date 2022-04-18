@@ -14,8 +14,7 @@ namespace WindowsFormsApp4
     public partial class SotrudnikiRedact : Form
     {
         MySqlConnection conn;
-        Sotrudniki sotrudniki = new Sotrudniki();
-        string SelectedTable = Convert.ToString(sotrudniki.toolStripComboBox1.Text);
+        public string select;
         public SotrudnikiRedact()
         {
             InitializeComponent();
@@ -30,8 +29,8 @@ namespace WindowsFormsApp4
 
         public void GetListId()
         {
-            
-            string que = $"select id from {Convert.ToString(sotrudniki.toolStripComboBox1.Text)}";
+            MessageBox.Show($"{select}");
+            string que = $"select id from {select}";
             conn.Open();
             MySqlCommand com = new MySqlCommand(que, conn);
             MySqlDataReader reader = com.ExecuteReader();

@@ -54,6 +54,7 @@ namespace WindowsFormsApp4
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(166, 20);
             this.textBox1.TabIndex = 1;
+            this.textBox1.UseSystemPasswordChar = true;
             // 
             // textBox2
             // 

@@ -18,7 +18,7 @@ namespace WindowsFormsApp4
         private DataSet ds = new DataSet();
         private DataTable table = new DataTable();
         string id_selected_rows = "0";
-        string SelectedTable;
+        public string SelectedTable;
         string commandStr;
         public string comm;
 
@@ -265,6 +265,7 @@ namespace WindowsFormsApp4
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
             SotrudnikiRedact sotrudnikiRedact = new SotrudnikiRedact();
+            sotrudnikiRedact.select = toolStripComboBox1.Text;
             sotrudnikiRedact.ShowDialog();
             reload_list();
         }
