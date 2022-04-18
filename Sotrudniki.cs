@@ -28,6 +28,26 @@ namespace WindowsFormsApp4
         }
 
         MySqlConnection conn;
+        private void Sotrudniki_Load(object sender, EventArgs e)
+        {
+            Program.Podkl connn = new Program.Podkl();
+            conn = new MySqlConnection(connn.Connstring);
+            items();
+            ChangeColorDGV();
+            dataGridView1.Columns[0].FillWeight = 5;
+            dataGridView1.Columns[1].FillWeight = 34;
+            dataGridView1.Columns[2].FillWeight = 10;
+            dataGridView1.Columns[3].FillWeight = 13;
+            dataGridView1.Columns[0].ReadOnly = true;
+            dataGridView1.Columns[1].ReadOnly = true;
+            dataGridView1.Columns[2].ReadOnly = true;
+            dataGridView1.Columns[3].ReadOnly = true;
+            dataGridView1.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView1.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView1.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView1.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView1.RowHeadersVisible = false;
+        }
 
         public void GetSelectedIDString()
         {
@@ -144,27 +164,6 @@ namespace WindowsFormsApp4
             return result;
         }
 
-        private void Sotrudniki_Load(object sender, EventArgs e)
-        {
-            Program.Podkl connn = new Program.Podkl();
-            conn = new MySqlConnection(connn.Connstring);
-            items();
-            ChangeColorDGV();
-            dataGridView1.Columns[0].FillWeight = 5;
-            dataGridView1.Columns[1].FillWeight = 34;
-            dataGridView1.Columns[2].FillWeight = 10;
-            dataGridView1.Columns[3].FillWeight = 13;
-            dataGridView1.Columns[0].ReadOnly = true;
-            dataGridView1.Columns[1].ReadOnly = true;
-            dataGridView1.Columns[2].ReadOnly = true;
-            dataGridView1.Columns[3].ReadOnly = true;
-            dataGridView1.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridView1.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridView1.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridView1.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridView1.RowHeadersVisible = false;
-        }
-
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
             GetSelectedIDString();
@@ -265,21 +264,9 @@ namespace WindowsFormsApp4
 
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
-            if (textBox4.Text == "")
-            {
-                MessageBox.Show("пожалуйста, укажите новую должность");
-            }
-            else
-            {
-                GetSelectedIDString();
-                string newdolg = Convert.ToString(textBox4.Text);
-                string cm = ($"UPDATE {SelectedTable} SET dolg='{newdolg}' WHERE id='{id_selected_rows}'");
-                MySqlCommand redact = new MySqlCommand(cm, conn);
-                conn.Open();
-                redact.ExecuteNonQuery();
-                conn.Close();
-                reload_list();
-            }
+            SotrudnikiRedact sotrudnikiRedact = new SotrudnikiRedact();
+            sotrudnikiRedact.ShowDialog();
+            reload_list();
         }
 
         private void dataGridView1_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
