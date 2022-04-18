@@ -40,10 +40,10 @@ namespace WindowsFormsApp4
         {
             listBox1.Items.Clear();
             SelectedTable = Convert.ToString(toolStripComboBox1.Text);
-            commandStr = $"SELECT id, FIO as ФИО, age as Возраст, dolg as Должность FROM {SelectedTable}";
-            string commandStr1 = $"SELECT id, FIO, age, dolg FROM сотрудники1";
-            string commandStr2 = $"SELECT id, FIO, age, dolg FROM сотрудники2";
-            string commandStr3 = $"SELECT id, FIO, age, dolg FROM сотрудники3";
+            commandStr = $"SELECT id, FIO as ФИО, age as Возраст, dolg as Должность, phone_number as 'номер телефона' FROM {SelectedTable}";
+            string commandStr1 = $"SELECT id, FIO, age, dolg FROM Sotrudniki_1";
+            string commandStr2 = $"SELECT id, FIO, age, dolg FROM Sotrudniki_2";
+            string commandStr3 = $"SELECT id, FIO, age, dolg FROM Sotrudniki_3";
             conn.Open();
             MyDA.SelectCommand = new MySqlCommand(commandStr, conn);
             MySqlCommand com1 = new MySqlCommand(commandStr1, conn);
@@ -112,18 +112,18 @@ namespace WindowsFormsApp4
 
         public void items()
         {
-            toolStripComboBox1.Items.Add("сотрудники1");
-            toolStripComboBox1.Items.Add("сотрудники2");
-            toolStripComboBox1.Items.Add("сотрудники3");
-            toolStripComboBox1.Text = "сотрудники1";
+            toolStripComboBox1.Items.Add("Sotrudniki_1");
+            toolStripComboBox1.Items.Add("Sotrudniki_2");
+            toolStripComboBox1.Items.Add("Sotrudniki_3");
+            toolStripComboBox1.Text = "Sotrudniki_1";
         }
 
-        public bool InsertSotrudniki(string Ifio, string Iage, string Idolg)
+        public bool InsertSotrudniki(string Ifio, string Iage, string Idolg, string Inumber)
         {
             int InsertCount = 0;
             bool result = false;
             conn.Open();
-            string query = $"INSERT INTO {SelectedTable} (FIO, age, dolg) VALUES ('{Ifio}', '{Iage}', '{Idolg}')";
+            string query = $"INSERT INTO {SelectedTable} (FIO, age, dolg, phone_number) VALUES ('{Ifio}', '{Iage}', '{Idolg}', '{Inumber}')";
             try
             {
                 MySqlCommand command = new MySqlCommand(query, conn);
@@ -200,17 +200,17 @@ namespace WindowsFormsApp4
             reload_list();
             listBox2.Items.Clear();
     
-            if(SelectedTable == "сотрудники1")
+            if(SelectedTable == "Sotrudniki_1")
             {
-                comm = $"SELECT Номер_Пекарни, Район, Улица, Номер_телефона, Часы_работы FROM адреса where Номер_Пекарни = 1";
+                comm = $"SELECT Pekarnya_number, Rayon, Street, Phone_number, Phone_number FROM adreses where Pekarnya_number = 1";
             }
-            else if(SelectedTable == "сотрудники2")
+            else if(SelectedTable == "Sotrudniki_2")
             {
-                comm = $"SELECT Номер_Пекарни, Район, Улица, Номер_телефона, Часы_работы FROM адреса where Номер_Пекарни = 2";
+                comm = $"SELECT Pekarnya_number, Rayon, Street, Phone_number, Phone_number FROM adreses where Pekarnya_number = 2";
             }
-            else if(SelectedTable == "сотрудники3")
+            else if(SelectedTable == "Sotrudniki_3")
             {
-                comm = $"SELECT Номер_Пекарни, Район, Улица, Номер_телефона, Часы_работы FROM адреса where Номер_Пекарни = 3";
+                comm = $"SELECT Pekarnya_number, Rayon, Street, Phone_number, Phone_number FROM adreses where Pekarnya_number = 3";
             }
             conn.Open();
             MySqlCommand com1 = new MySqlCommand(comm, conn);
@@ -252,7 +252,8 @@ namespace WindowsFormsApp4
             string Ifio = textBox1.Text;
             string Iage = textBox2.Text;
             string Idolg = textBox3.Text;
-            if (InsertSotrudniki(Ifio, Iage, Idolg))
+            string Inumber = textBox4.Text;
+            if (InsertSotrudniki(Ifio, Iage, Idolg, Inumber))
             {
                 reload_list();
             }

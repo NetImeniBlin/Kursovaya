@@ -60,7 +60,7 @@ namespace WindowsFormsApp4
 
         public void GetListUsers()
         {
-            commandStr = $"SELECT id, log as Логин, pass as Пароль, fio as ФИО, Номер_пекарни as 'Номер пекарни' FROM users";
+            commandStr = $"SELECT id, log as Логин, pass as Пароль, fio as ФИО, Pekarnya_number as 'Номер пекарни' FROM users";
             conn.Open();
             MyDA.SelectCommand = new MySqlCommand(commandStr, conn);
             MyDA.Fill(table);
@@ -97,13 +97,13 @@ namespace WindowsFormsApp4
             switch (Convert.ToInt32(CM.Text))
             {
                 case 1:
-                    query = $"insert into сотрудники1 (FIO, dolg) values ('{txt.Text}', 'менеджер')";
+                    query = $"insert into Sotrudniki_1 (FIO, dolg) values ('{txt.Text}', 'менеджер')";
                     break;
                 case 2:
-                    query = $"insert into сотрудники2 (FIO, dolg) values ('{txt.Text}', 'менеджер')";
+                    query = $"insert into Sotrudniki_2 (FIO, dolg) values ('{txt.Text}', 'менеджер')";
                     break;
                 case 3:
-                    query = $"insert into сотрудники3 (FIO, dolg) values ('{txt.Text}', 'менеджер')";
+                    query = $"insert into Sotrudniki_3 (FIO, dolg) values ('{txt.Text}', 'менеджер')";
                     break;
             }
             MySqlCommand com = new MySqlCommand(query, conn);
@@ -123,7 +123,7 @@ namespace WindowsFormsApp4
             }
             else
             {
-                query = $"INSERT INTO users (log, pass, fio, Номер_пекарни) VALUES ('{Ilog}', '{Ipass}', '{Ifio}', {Inumber})";
+                query = $"INSERT INTO users (log, pass, fio, Pekarnya_number) VALUES ('{Ilog}', '{Ipass}', '{Ifio}', {Inumber})";
             }
             try
             {

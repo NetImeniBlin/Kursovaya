@@ -80,7 +80,7 @@ namespace WindowsFormsApp4
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 107);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 189);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(438, 329);
             this.dataGridView1.TabIndex = 5;
@@ -99,7 +99,7 @@ namespace WindowsFormsApp4
             this.toolStripLabel2});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(712, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(874, 25);
             this.toolStrip1.TabIndex = 6;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -201,7 +201,7 @@ namespace WindowsFormsApp4
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(580, 32);
+            this.textBox4.Location = new System.Drawing.Point(12, 107);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(120, 20);
             this.textBox4.TabIndex = 10;
@@ -212,17 +212,17 @@ namespace WindowsFormsApp4
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.SystemColors.Window;
             this.label4.Enabled = false;
-            this.label4.Location = new System.Drawing.Point(586, 35);
+            this.label4.Location = new System.Drawing.Point(18, 110);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(97, 13);
+            this.label4.Size = new System.Drawing.Size(93, 13);
             this.label4.TabIndex = 11;
-            this.label4.Text = "Новая должность";
+            this.label4.Text = "Номер телефона";
             // 
             // listBox1
             // 
             this.listBox1.Enabled = false;
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(580, 58);
+            this.listBox1.Location = new System.Drawing.Point(657, 80);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(43, 17);
             this.listBox1.TabIndex = 12;
@@ -241,7 +241,7 @@ namespace WindowsFormsApp4
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(712, 450);
+            this.ClientSize = new System.Drawing.Size(874, 530);
             this.Controls.Add(this.listBox2);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.label4);
