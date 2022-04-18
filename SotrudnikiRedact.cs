@@ -40,5 +40,42 @@ namespace WindowsFormsApp4
             }
             conn.Close();
         }
+
+        public void UPDate(TextBox txt, string column)
+        {
+            int selected_id = Convert.ToInt32(comboBox1.SelectedItem);
+            string newdata = Convert.ToString(txt.Text);
+            string cm = $"UPDATE {select} SET {column}='{newdata}' WHERE id='{selected_id}'";
+            MySqlCommand redact = new MySqlCommand(cm, conn);
+            conn.Open();
+            redact.ExecuteNonQuery();
+            conn.Close();
+        }
+
+        public void TextboxFill(TextBox txt, string column)
+        {
+            string que1 = $"select {column} from {select} where id={Convert.ToInt32(comboBox1.SelectedItem)}";
+            MySqlCommand com1 = new MySqlCommand(que1, conn);
+            conn.Open();
+            string result = com1.ExecuteScalar().ToString();
+            conn.Close();
+            txt.Text = result;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            UPDate(textBox1, "FIO");
+            UPDate(textBox2, "age");
+            UPDate(textBox3, "dolg");
+            UPDate(textBox4, "Phone_number");
+        }
+
+        private void comboBox1_TextChanged(object sender, EventArgs e)
+        {
+            TextboxFill(textBox1, "FIO");
+            TextboxFill(textBox2, "age");
+            TextboxFill(textBox3, "dolg");
+            TextboxFill(textBox4, "Phone_number");
+        }
     }
 }
