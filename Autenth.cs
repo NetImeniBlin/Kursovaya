@@ -26,7 +26,7 @@ namespace WindowsFormsApp4
             conn = new MySqlConnection(connn.Connstring);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        public void Autenthi()
         {
             string com = $"SELECT * FROM users WHERE log ='{textBox1.Text}' and pass ='{textBox2.Text}'";
             string com1 = $"SELECT fio FROM users WHERE log ='{textBox1.Text}' and pass ='{textBox2.Text}'";
@@ -44,16 +44,29 @@ namespace WindowsFormsApp4
             {
                 this.Hide();
                 string fio = command1.ExecuteScalar().ToString();
-                MessageBox.Show($"здраствуйте {fio}","status: succes");
+                MessageBox.Show($"здраствуйте {fio}", "status: succes");
                 Menu menu = new Menu();
                 menu.ShowDialog();
                 this.Close();
             }
             else
             {
-                MessageBox.Show("Неверные данные авторизации!","status: fail");
+                MessageBox.Show("Неверные данные авторизации!", "status: fail");
             }
             conn.Close();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Autenthi();
+        }
+
+        private void textBox2_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Autenthi();
+            }
         }
     }
 }

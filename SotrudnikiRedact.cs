@@ -64,10 +64,16 @@ namespace WindowsFormsApp4
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (textBox1.Text == "" | textBox2.Text == "" | textBox3.Text == "" | textBox4.Text == "" | comboBox1.Text == "")
+            {
+                MessageBox.Show("Введите необходимые данные","status: failed");
+                return;
+            }
             UPDate(textBox1, "FIO");
             UPDate(textBox2, "age");
             UPDate(textBox3, "dolg");
             UPDate(textBox4, "Phone_number");
+            MessageBox.Show("Редактирование прошло успешно","status: succes");
         }
 
         private void comboBox1_TextChanged(object sender, EventArgs e)

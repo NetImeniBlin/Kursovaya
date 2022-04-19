@@ -92,8 +92,8 @@ namespace WindowsFormsApp4
             this.toolStrip1.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButton1,
-            this.toolStripButton2,
             this.toolStripButton3,
+            this.toolStripButton2,
             this.toolStripComboBox1,
             this.toolStripLabel1,
             this.toolStripLabel2,
