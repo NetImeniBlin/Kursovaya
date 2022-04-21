@@ -158,11 +158,22 @@ namespace WindowsFormsApp4
 
         public void TextboxFill(TextBox txt, string column)
         {
-            string que1 = $"select {column} from users where id={Convert.ToInt32(comboBox1.SelectedItem)}";
-            MySqlCommand com1 = new MySqlCommand(que1, conn);
-            conn.Open();
-            string result = com1.ExecuteScalar().ToString();
-            conn.Close();
+            string result;
+            try
+            {
+                string que1 = $"select {column} from users where id={Convert.ToInt32(comboBox1.SelectedItem)}";
+                MySqlCommand com1 = new MySqlCommand(que1, conn);
+                conn.Open();
+                result = com1.ExecuteScalar().ToString();
+            }
+            catch (Exception ex)
+            {
+                return;
+            }
+            finally
+            {
+                conn.Close();
+            }
             txt.Text = result;
         }
 

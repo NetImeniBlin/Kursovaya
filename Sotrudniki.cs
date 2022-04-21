@@ -56,46 +56,79 @@ namespace WindowsFormsApp4
             id_selected_rows = dataGridView1.Rows[Convert.ToInt32(index_selected_rows)].Cells[0].Value.ToString();
         }
         
+        public void GetCount()
+        {
+            for (int i = 1; i <= 3; i++)
+            {
+                conn.Open();
+                string commandStr = $"SELECT * FROM Sotrudniki_{i}";
+                MySqlCommand com = new MySqlCommand(commandStr, conn);
+                MySqlDataReader reader = com.ExecuteReader();
+                while (reader.Read())
+                {
+                    listBox1.Items.Add(reader[0].ToString());
+                }
+                reader.Close();
+                conn.Close();
+            }
+            int count_rows = listBox1.Items.Count;
+            toolStripLabel1.Text = (count_rows).ToString();
+        }
+
         public void GetListUsers()
         {
             listBox1.Items.Clear();
             SelectedTable = Convert.ToString(toolStripComboBox1.Text);
             commandStr = $"SELECT id, FIO as ФИО, age as Возраст, dolg as Должность, phone_number as 'номер телефона' FROM {SelectedTable}";
-            string commandStr1 = $"SELECT id, FIO, age, dolg FROM Sotrudniki_1";
-            string commandStr2 = $"SELECT id, FIO, age, dolg FROM Sotrudniki_2";
-            string commandStr3 = $"SELECT id, FIO, age, dolg FROM Sotrudniki_3";
+            try
+            {
+                conn.Open();
+                MyDA.SelectCommand = new MySqlCommand(commandStr, conn);
+                MyDA.SelectCommand = new MySqlCommand(commandStr, conn);
+                MyDA.Fill(table);
+                bSource.DataSource = table;
+                dataGridView1.DataSource = bSource;
+            }
+            catch (Exception ex)
+            {
+                return;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        public void GetPekInfo()
+        {
+            listBox2.Items.Clear();
+            switch (SelectedTable)
+            {
+                case "Sotrudniki_1":
+                    comm = $"SELECT Pekarnya_number, Rayon, Street, Phone_number, Phone_number FROM adreses where Pekarnya_number = 1";
+                    break;
+                case "Sotrudniki_2":
+                    comm = $"SELECT Pekarnya_number, Rayon, Street, Phone_number, Phone_number FROM adreses where Pekarnya_number = 2";
+                    break;
+                case "Sotrudniki_3":
+                    comm = $"SELECT Pekarnya_number, Rayon, Street, Phone_number, Phone_number FROM adreses where Pekarnya_number = 3";
+                    break;
+                    default:
+                    return;
+            }
             conn.Open();
-            MyDA.SelectCommand = new MySqlCommand(commandStr, conn);
-            MySqlCommand com1 = new MySqlCommand(commandStr1, conn);
+            MySqlCommand com1 = new MySqlCommand(comm, conn);
             MySqlDataReader reader1 = com1.ExecuteReader();
             while (reader1.Read())
             {
-                listBox1.Items.Add(reader1[0].ToString());
+                listBox2.Items.Add("Номер пекарни - " + reader1[0].ToString());
+                listBox2.Items.Add("Район - " + reader1[1].ToString());
+                listBox2.Items.Add("Улица - " + reader1[2].ToString());
+                listBox2.Items.Add("Номер телефон - " + reader1[3].ToString());
+                listBox2.Items.Add("Часы работы - " + reader1[4].ToString());
             }
             reader1.Close();
-            MySqlCommand com2 = new MySqlCommand(commandStr2, conn);
-            MySqlDataReader reader2 = com2.ExecuteReader();
-            while (reader2.Read())
-            {
-                listBox1.Items.Add(reader2[0].ToString());
-            }
-            reader2.Close();
-            MySqlCommand com3 = new MySqlCommand(commandStr3, conn);
-            MySqlDataReader reader3 = com3.ExecuteReader();
-            while (reader3.Read())
-            {
-                listBox1.Items.Add(reader3[0].ToString());
-            }
-            reader3.Close();
-
-            MyDA.SelectCommand = new MySqlCommand(commandStr, conn);
-            MyDA.Fill(table);
-            bSource.DataSource = table;
-            dataGridView1.DataSource = bSource;
             conn.Close();
-
-            int count_rows = listBox1.Items.Count;
-            toolStripLabel1.Text = (count_rows).ToString();
         }
 
         public void reload_list()
@@ -103,6 +136,8 @@ namespace WindowsFormsApp4
             table.Clear();
             GetListUsers();
             ChangeColorDGV();
+            GetPekInfo();
+            GetCount();
         }
 
         private void ChangeColorDGV()
@@ -197,33 +232,7 @@ namespace WindowsFormsApp4
         {
             SelectedTable = Convert.ToString(toolStripComboBox1.Text);
             reload_list();
-            listBox2.Items.Clear();
-    
-            if(SelectedTable == "Sotrudniki_1")
-            {
-                comm = $"SELECT Pekarnya_number, Rayon, Street, Phone_number, Phone_number FROM adreses where Pekarnya_number = 1";
-            }
-            else if(SelectedTable == "Sotrudniki_2")
-            {
-                comm = $"SELECT Pekarnya_number, Rayon, Street, Phone_number, Phone_number FROM adreses where Pekarnya_number = 2";
-            }
-            else if(SelectedTable == "Sotrudniki_3")
-            {
-                comm = $"SELECT Pekarnya_number, Rayon, Street, Phone_number, Phone_number FROM adreses where Pekarnya_number = 3";
-            }
-            conn.Open();
-            MySqlCommand com1 = new MySqlCommand(comm, conn);
-            MySqlDataReader reader1 = com1.ExecuteReader();
-            while (reader1.Read())
-            {
-                listBox2.Items.Add("Номер пекарни - " + reader1[0].ToString());
-                listBox2.Items.Add("Район - " + reader1[1].ToString());
-                listBox2.Items.Add("Улица - " + reader1[2].ToString());
-                listBox2.Items.Add("Номер телефон - " + reader1[3].ToString());
-                listBox2.Items.Add("Часы работы - " + reader1[4].ToString());
-            }
-            reader1.Close();
-            conn.Close();
+            
         }
 
         private void textBox1_MouseClick(object sender, MouseEventArgs e)
@@ -258,7 +267,7 @@ namespace WindowsFormsApp4
             }
             else
             {
-                MessageBox.Show("Произошла ошибка.", "Ошибка");
+                MessageBox.Show("Произошла ошибка.", "status: fail");
             }
         }
 
