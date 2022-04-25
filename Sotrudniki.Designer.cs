@@ -50,6 +50,8 @@ namespace WindowsFormsApp4
             this.label4 = new System.Windows.Forms.Label();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.listBox2 = new System.Windows.Forms.ListBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -81,7 +83,7 @@ namespace WindowsFormsApp4
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 133);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 159);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(610, 290);
             this.dataGridView1.TabIndex = 5;
@@ -240,17 +242,43 @@ namespace WindowsFormsApp4
             // listBox2
             // 
             this.listBox2.FormattingEnabled = true;
-            this.listBox2.Location = new System.Drawing.Point(628, 133);
+            this.listBox2.Location = new System.Drawing.Point(628, 159);
             this.listBox2.Name = "listBox2";
             this.listBox2.Size = new System.Drawing.Size(234, 290);
             this.listBox2.TabIndex = 13;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "стажёр",
+            "в отпуске",
+            "работает"});
+            this.comboBox1.Location = new System.Drawing.Point(12, 134);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(149, 21);
+            this.comboBox1.TabIndex = 14;
+            this.comboBox1.DropDown += new System.EventHandler(this.comboBox1_DropDown);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.SystemColors.Window;
+            this.label5.Enabled = false;
+            this.label5.Location = new System.Drawing.Point(18, 137);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(41, 13);
+            this.label5.TabIndex = 15;
+            this.label5.Text = "Статус";
             // 
             // Sotrudniki
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(874, 434);
+            this.ClientSize = new System.Drawing.Size(874, 457);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.listBox2);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.label4);
@@ -296,5 +324,7 @@ namespace WindowsFormsApp4
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.ListBox listBox2;
         private System.Windows.Forms.ToolStripLabel toolStripLabel3;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label5;
     }
 }

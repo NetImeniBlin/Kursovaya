@@ -38,14 +38,17 @@ namespace WindowsFormsApp4
             dataGridView1.Columns[1].FillWeight = 34;
             dataGridView1.Columns[2].FillWeight = 10;
             dataGridView1.Columns[3].FillWeight = 13;
+            dataGridView1.Columns[4].FillWeight = 13;
             dataGridView1.Columns[0].ReadOnly = true;
             dataGridView1.Columns[1].ReadOnly = true;
             dataGridView1.Columns[2].ReadOnly = true;
             dataGridView1.Columns[3].ReadOnly = true;
+            dataGridView1.Columns[4].ReadOnly = true;
             dataGridView1.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridView1.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridView1.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridView1.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView1.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridView1.RowHeadersVisible = false;
         }
 
@@ -79,7 +82,7 @@ namespace WindowsFormsApp4
         {
             listBox1.Items.Clear();
             SelectedTable = Convert.ToString(toolStripComboBox1.Text);
-            commandStr = $"SELECT id, FIO as ФИО, age as Возраст, dolg as Должность, phone_number as 'номер телефона' FROM {SelectedTable}";
+            commandStr = $"SELECT id, FIO as ФИО, age as Возраст, dolg as Должность, phone_number as 'номер телефона', status as 'Статус' FROM {SelectedTable}";
             try
             {
                 conn.Open();
@@ -145,16 +148,12 @@ namespace WindowsFormsApp4
             int count_rows = dataGridView1.RowCount - 1;
             for (int i = 0; i < count_rows; i++)
             {
-                string dolgstatus = Convert.ToString(dataGridView1.Rows[i].Cells[3].Value);
-                if (dolgstatus == "стажер")
+                string status = Convert.ToString(dataGridView1.Rows[i].Cells[5].Value);
+                if (status == "стажёр")
                 {
                     dataGridView1.Rows[i].DefaultCellStyle.BackColor = Color.Yellow;
                 }
-                else if (dolgstatus == "стажёр")
-                {
-                    dataGridView1.Rows[i].DefaultCellStyle.BackColor = Color.Yellow;
-                }
-                else if (dolgstatus == "уволен")
+                else if (status == "в отпуске")
                 {
                     dataGridView1.Rows[i].DefaultCellStyle.BackColor = Color.Red;
                 }
@@ -173,12 +172,12 @@ namespace WindowsFormsApp4
             toolStripComboBox1.Text = "Sotrudniki_1";
         }
 
-        public bool InsertSotrudniki(string Ifio, string Iage, string Idolg, string Inumber)
+        public bool InsertSotrudniki(string Ifio, string Iage, string Idolg, string Inumber, string Istatus)
         {
             int InsertCount = 0;
             bool result = false;
             conn.Open();
-            string query = $"INSERT INTO {SelectedTable} (FIO, age, dolg, phone_number) VALUES ('{Ifio}', '{Iage}', '{Idolg}', '{Inumber}')";
+            string query = $"INSERT INTO {SelectedTable} (FIO, age, dolg, phone_number, status) VALUES ('{Ifio}', '{Iage}', '{Idolg}', '{Inumber}', '{Istatus}')";
             try
             {
                 MySqlCommand command = new MySqlCommand(query, conn);
@@ -254,6 +253,10 @@ namespace WindowsFormsApp4
         {
             label4.Visible = false;
         }
+        private void comboBox1_DropDown(object sender, EventArgs e)
+        {
+            label5.Visible = false;
+        }
 
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
@@ -261,7 +264,8 @@ namespace WindowsFormsApp4
             string Iage = textBox2.Text;
             string Idolg = textBox3.Text;
             string Inumber = textBox4.Text;
-            if (InsertSotrudniki(Ifio, Iage, Idolg, Inumber))
+            string Istatus = comboBox1.Text;
+            if (InsertSotrudniki(Ifio, Iage, Idolg, Inumber, Istatus))
             {
                 reload_list();
             }
@@ -275,7 +279,7 @@ namespace WindowsFormsApp4
         {
             SotrudnikiRedact sotrudnikiRedact = new SotrudnikiRedact();
             sotrudnikiRedact.select = toolStripComboBox1.Text;
-            sotrudnikiRedact.ShowDialog();
+            sotrudnikiRedact.Show();
             reload_list();
         }
 
