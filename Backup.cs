@@ -20,58 +20,34 @@ namespace WindowsFormsApp4
         }
 
         MySqlConnection conn;
+        string selectedFolder;
+        string file;
 
         private void Backup_Load(object sender, EventArgs e)
         {
             Program.Podkl connn = new Program.Podkl();
             conn = new MySqlConnection(connn.Connstring);
-            string path = "C:\\backup";
-            if (Directory.Exists(path))
+            string path =  Application.StartupPath;
+            if (File.Exists($"{path}\\path.txt") == false)
             {
-                string[] files = Directory.GetFiles(path);
-                foreach (string kolvo in files)
-                {
-                    comboBox1.Items.Add(kolvo);
-                }
-            }
-            else
-            {
-                Directory.CreateDirectory("C:\\backup");
-                string[] files = Directory.GetFiles(path);
-                foreach (string kolvo in files)
-                {
-                    comboBox1.Items.Add(kolvo);
-                }
+                File.Create($"{path}\\path.txt");
             }
         }
 
-        public void comboUpdate()
-        {
-            comboBox1.Items.Clear();
-            string path = "C:\\backup";
-            string[] files = Directory.GetFiles(path);
-            foreach (string kolvo in files)
-            {
-                comboBox1.Items.Add(kolvo);
-            }
-        }
-        
         private void button1_Click(object sender, EventArgs e)
         {
-            DateTime time = DateTime.Today;
-            string backupdate = (time.ToString("d"));
-            string file = $"C:\\backup\\{backupdate}.sql";
-            if (File.Exists(file))
+            folderBrowserDialog1.ShowDialog();
+            selectedFolder = folderBrowserDialog1.SelectedPath;
+            textBox1.Text = selectedFolder;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if(selectedFolder == null == false)
             {
-                MessageBox.Show("копия с таким названием уже есть, пожалуйста введите другое");
-                button3.Enabled = true;
-                button3.Visible = true;
-                textBox1.Enabled = true;
-                textBox1.Visible = true;
-                label1.Visible = true;
-            }
-            else
-            {
+                DateTime time = DateTime.Now;
+                string backupdate = (time.ToString("MM.dd.yyyy.HH.mm.ss"));
+                file = $"{selectedFolder}\\{backupdate}.sql";
                 using (MySqlCommand cmd = new MySqlCommand())
                 {
                     using (MySqlBackup mb = new MySqlBackup(cmd))
@@ -83,56 +59,11 @@ namespace WindowsFormsApp4
                     }
                 }
                 MessageBox.Show("копия создана");
-                comboUpdate();
-            }
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            string file = Convert.ToString(comboBox1.Text);
-            MySqlCommand cmd = new MySqlCommand();
-            MySqlBackup ex = new MySqlBackup(cmd);
-            cmd.Connection = conn;
-            conn.Open();
-            ex.ImportFromFile(file);
-            conn.Close();
-            MessageBox.Show("копия успешно восстановлена", "status: succes");
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            string NewFileName = ("C:\\backup\\" + Convert.ToString(textBox1.Text) + ".sql");
-            if (textBox1.Text == "")
-            {
-                MessageBox.Show("пожалуйста укажите название копии");
-            }
-            else if (File.Exists(NewFileName))
-            {
-                MessageBox.Show("копия с таким названием уже есть, пожалуйста введите другое");
             }
             else
             {
-                using (MySqlCommand cmd = new MySqlCommand())
-                {
-                    using (MySqlBackup mb = new MySqlBackup(cmd))
-                    {
-                        cmd.Connection = conn;
-                        conn.Open();
-                        mb.ExportToFile(NewFileName);
-                        conn.Close();
-                    }
-                }
-                MessageBox.Show("копия создана");
-                comboUpdate();
+                MessageBox.Show("не выбрана папка для копии");
             }
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            string file = Convert.ToString(comboBox1.Text);
-            File.Delete(file);
-            MessageBox.Show($"копия {file} была удалена");
-            comboUpdate();
         }
     }
 }
