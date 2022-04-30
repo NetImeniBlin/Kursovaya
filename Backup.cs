@@ -21,17 +21,30 @@ namespace WindowsFormsApp4
 
         MySqlConnection conn;
         string selectedFolder;
-        string file;
+        string copyName;
+        string path = $"{Application.StartupPath}\\path.txt";
+        string selectedFile;
+        FolderLog folderLog = new FolderLog();
+
+        public void LogRefresh()
+        {
+            folderLog.listBox1.Items.Clear();
+            string[] log = File.ReadAllLines(Path.Combine(path), Encoding.Default);
+            foreach (string line in log)
+            {
+                folderLog.listBox1.Items.Add(line);
+            }
+        }
 
         private void Backup_Load(object sender, EventArgs e)
         {
             Program.Podkl connn = new Program.Podkl();
             conn = new MySqlConnection(connn.Connstring);
-            string path =  Application.StartupPath;
-            if (File.Exists($"{path}\\path.txt") == false)
+            if (File.Exists(path) == false)
             {
-                File.Create($"{path}\\path.txt");
+                File.Create(path);
             }
+            LogRefresh();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -43,27 +56,73 @@ namespace WindowsFormsApp4
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if(selectedFolder == null == false)
+            try
             {
                 DateTime time = DateTime.Now;
                 string backupdate = (time.ToString("MM.dd.yyyy.HH.mm.ss"));
-                file = $"{selectedFolder}\\{backupdate}.sql";
+                copyName = $"{selectedFolder}\\{backupdate}.sql";
                 using (MySqlCommand cmd = new MySqlCommand())
                 {
                     using (MySqlBackup mb = new MySqlBackup(cmd))
                     {
                         cmd.Connection = conn;
                         conn.Open();
-                        mb.ExportToFile(file);
+                        mb.ExportToFile(copyName);
                         conn.Close();
                     }
                 }
+                File.AppendAllText(path, (selectedFolder + Environment.NewLine), Encoding.Default);
+                LogRefresh();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("ошибка, не выбрана папка или она не допустима для записи", "status: fail");
+                return;
+            }
+            finally
+            {
                 MessageBox.Show("копия создана");
             }
-            else
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.ShowDialog();
+            selectedFile = openFileDialog1.FileName;
+            textBox2.Text = selectedFile;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            folderLog.Show();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            try
             {
-                MessageBox.Show("не выбрана папка для копии");
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlBackup ex = new MySqlBackup(cmd);
+                cmd.Connection = conn;
+                conn.Open();
+                ex.ImportFromFile(selectedFile);
+                conn.Close();
             }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "status: fail");
+                return;
+            }
+            finally
+            {
+                MessageBox.Show("копия успешно восстановлена", "status: succes");
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            File.Delete(selectedFile);
+            MessageBox.Show("копия была удалена");
         }
     }
 }
