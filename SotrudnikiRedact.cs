@@ -29,7 +29,6 @@ namespace WindowsFormsApp4
 
         public void GetListId()
         {
-            MessageBox.Show($"{select}");
             string que = $"select id from {select}";
             conn.Open();
             MySqlCommand com = new MySqlCommand(que, conn);

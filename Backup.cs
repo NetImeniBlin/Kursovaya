@@ -42,9 +42,9 @@ namespace WindowsFormsApp4
             conn = new MySqlConnection(connn.Connstring);
             if (File.Exists(path) == false)
             {
-                File.Create(path);
+                Stream stream;
+                using (stream = File.Create(path));
             }
-            LogRefresh();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -79,10 +79,7 @@ namespace WindowsFormsApp4
                 MessageBox.Show("ошибка, не выбрана папка или она не допустима для записи", "status: fail");
                 return;
             }
-            finally
-            {
-                MessageBox.Show("копия создана");
-            }
+            MessageBox.Show("Копия создана");
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -94,6 +91,7 @@ namespace WindowsFormsApp4
 
         private void button4_Click(object sender, EventArgs e)
         {
+            LogRefresh();
             folderLog.Show();
         }
 
