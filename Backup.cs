@@ -92,7 +92,7 @@ namespace WindowsFormsApp4
         private void button4_Click(object sender, EventArgs e)
         {
             LogRefresh();
-            folderLog.Show();
+            folderLog.ShowDialog();
         }
 
         private void button5_Click(object sender, EventArgs e)
