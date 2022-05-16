@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 
@@ -21,17 +22,31 @@ namespace WindowsFormsApp4
         public string SelectedTable;
         string commandStr;
         public string comm;
+        delegate void LoadDel();
+        MySqlConnection conn;
 
         public Sotrudniki()
         {
             InitializeComponent();
         }
 
-        MySqlConnection conn;
+        public void Loading()
+        {
+            LoadDel loadDel = SampleForDelegate;
+            Invoke(loadDel);
+        }
+
         private void Sotrudniki_Load(object sender, EventArgs e)
         {
             Program.Podkl connn = new Program.Podkl();
             conn = new MySqlConnection(connn.Connstring);
+            ThreadStart threadStart = new ThreadStart(Loading);
+            Thread thread = new Thread(threadStart);
+            thread.Start();
+        }
+
+        public void SampleForDelegate()
+        {
             items();
             ChangeColorDGV();
             dataGridView1.Columns[0].FillWeight = 5;

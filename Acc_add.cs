@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 
@@ -25,11 +26,25 @@ namespace WindowsFormsApp4
         private DataTable table = new DataTable();
         string commandStr;
         public string query;
+        delegate void LoadDel();
+
+        public void Loading()
+        {
+            LoadDel loadDel = SampleForDelegate;
+            Invoke(loadDel);
+        }
 
         private void Acc_add_Load(object sender, EventArgs e)
         {
             Program.Podkl connn = new Program.Podkl();
             conn = new MySqlConnection(connn.Connstring);
+            ThreadStart threadStart = new ThreadStart(Loading);
+            Thread thread = new Thread(threadStart);
+            thread.Start();
+        }
+
+        public void SampleForDelegate()
+        {
             GetListUsers();
             GetListId();
 
